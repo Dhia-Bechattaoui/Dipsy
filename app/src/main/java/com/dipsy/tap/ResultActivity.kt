@@ -69,6 +69,7 @@ class ResultActivity : ComponentActivity() {
         progressBar.visibility = View.VISIBLE
         ivStatus.visibility = View.GONE
         tvResult.text = "Processing..."
+        tvTransaction.visibility = View.VISIBLE
         tvDetail.text = "Checking status every 1 s"
         tvDetail.visibility = View.VISIBLE
         btnNewPayment.visibility = View.GONE
@@ -108,10 +109,12 @@ class ResultActivity : ComponentActivity() {
         if (status == "success") {
             ivStatus.setImageResource(R.drawable.ic_success)
             tvResult.text = "Payment approved"
+            tvTransaction.visibility = View.VISIBLE
             tvDetail.visibility = View.GONE
         } else {
             ivStatus.setImageResource(R.drawable.ic_failed)
             tvResult.text = "Payment failed"
+            tvTransaction.visibility = View.GONE
             if (!reason.isNullOrBlank()) {
                 tvDetail.text = "Reason: $reason"
                 tvDetail.visibility = View.VISIBLE
@@ -124,6 +127,7 @@ class ResultActivity : ComponentActivity() {
     private fun showTimeoutUI() {
         progressBar.visibility = View.GONE
         ivStatus.visibility = View.GONE
+        tvTransaction.visibility = View.GONE
         tvResult.text = "Still processing, check later"
         tvDetail.visibility = View.GONE
         btnNewPayment.visibility = View.VISIBLE
