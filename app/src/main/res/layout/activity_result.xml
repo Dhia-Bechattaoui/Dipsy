@@ -1,55 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
->
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:visibility="gone"
-        android:layout_gravity="center"/>
-
-    <ImageView
-        android:id="@+id/ivStatus"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:srcCompat="@android:drawable/checkbox_on_background" />
+    android:background="#F8F9FA"
+    android:orientation="vertical"
+    android:padding="24dp">
 
     <TextView
-        android:id="@+id/result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="12sp"
-        android:gravity="center"/>
-    <TextView
-        android:id="@+id/amount2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:text="12 QAR"
+        android:layout_marginTop="8dp"
         android:gravity="center"
-        />
+        android:text="Payment"
+        android:textColor="#333333"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/transaction"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:text="12 QAR"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:gravity="center"
-        />
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/ivStatus"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:src="@drawable/ic_success"
+                android:visibility="gone" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Processing..."
+            android:textColor="#111111"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/amount2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="QAR 0.00"
+            android:textColor="#111111"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/transaction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="tr_..."
+            android:textColor="#777777"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tvDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:text="Checking status every 1 s"
+            android:textColor="#777777"
+            android:textSize="14sp" />
+    </LinearLayout>
 
     <Button
-        android:id="@+id/btnNewPyament"
-        android:layout_width="150dp"
-        android:layout_height="60dp"
-        android:text="NewPayment"
-        />
+        android:id="@+id/btnNewPayment"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/bg_primary_button"
+        android:text="New payment"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:visibility="gone" />
 
 </LinearLayout>

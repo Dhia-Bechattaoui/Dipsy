@@ -3,160 +3,190 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#FFFFFF">
+    android:padding="20dp"
+    android:background="#F8F9FA">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter the Amount"
+        android:layout_marginTop="8dp"
         android:gravity="center"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/amount"
-        android:text="0.00 QAR"
-        android:gravity="center"
-        android:textSize="28sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvError"/>
-    <TableLayout
+        android:text="New payment"
+        android:textColor="#333333"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:stretchColumns="*"
         android:layout_weight="1"
-        >
-        <TableRow
-            android:layout_height="0dp"
-            android:layout_width="match_parent"
-            >
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter amount"
+            android:textColor="#777777"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="QAR 0.00"
+            android:textColor="#111111"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="12dp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/layoutError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#D32F2F"
+                android:textSize="14sp" />
+
             <Button
-                android:layout_width="100dp"
-                android:layout_height="75dp"
+                android:id="@+id/btnRetry"
+                style="@android:style/Widget.Material.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Retry"
+                android:textColor="#D32F2F"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*">
+
+        <TableRow android:layout_marginBottom="8dp">
+            <Button
                 android:id="@+id/btn1"
+                android:layout_height="64dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/bg_key_num"
                 android:text="1"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                />
+                android:textColor="#222222"
+                android:textSize="20sp" />
             <Button
-                android:layout_width="100dp"
-                android:layout_height="75dp"
                 android:id="@+id/btn2"
+                android:layout_height="64dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/bg_key_num"
                 android:text="2"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                />
+                android:textColor="#222222"
+                android:textSize="20sp" />
             <Button
-                android:layout_width="100dp"
-                android:layout_height="75dp"
                 android:id="@+id/btn3"
+                android:layout_height="64dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/bg_key_num"
                 android:text="3"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                />
-
-
+                android:textColor="#222222"
+                android:textSize="20sp" />
         </TableRow>
 
-        <TableRow
-            android:layout_height="0dp"
-            android:layout_width="match_parent"
-            >
+        <TableRow android:layout_marginBottom="8dp">
             <Button
-                android:layout_width="100dp"
-                android:layout_height="75dp"
                 android:id="@+id/btn4"
+                android:layout_height="64dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/bg_key_num"
                 android:text="4"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                />
+                android:textColor="#222222"
+                android:textSize="20sp" />
             <Button
-                android:layout_width="100dp"
-                android:layout_height="75dp"
                 android:id="@+id/btn5"
+                android:layout_height="64dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/bg_key_num"
                 android:text="5"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                />
+                android:textColor="#222222"
+                android:textSize="20sp" />
             <Button
-                android:layout_width="100dp"
-                android:layout_height="75dp"
                 android:id="@+id/btn6"
+                android:layout_height="64dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/bg_key_num"
                 android:text="6"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                />
-
-
+                android:textColor="#222222"
+                android:textSize="20sp" />
         </TableRow>
-        <TableRow
-            android:layout_height="0dp"
-            android:layout_width="match_parent"
-            >
+
+        <TableRow android:layout_marginBottom="8dp">
             <Button
-                android:layout_width="100dp"
-                android:layout_height="75dp"
                 android:id="@+id/btn7"
+                android:layout_height="64dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/bg_key_num"
                 android:text="7"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                />
+                android:textColor="#222222"
+                android:textSize="20sp" />
             <Button
-                android:layout_width="100dp"
-                android:layout_height="75dp"
                 android:id="@+id/btn8"
+                android:layout_height="64dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/bg_key_num"
                 android:text="8"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                />
+                android:textColor="#222222"
+                android:textSize="20sp" />
             <Button
-                android:layout_width="100dp"
-                android:layout_height="75dp"
                 android:id="@+id/btn9"
+                android:layout_height="64dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/bg_key_num"
                 android:text="9"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                />
-
-
+                android:textColor="#222222"
+                android:textSize="20sp" />
         </TableRow>
-        <TableRow
-            android:layout_height="0dp"
-            android:layout_width="match_parent"
-            >
+
+        <TableRow android:layout_marginBottom="8dp">
             <Button
-                android:layout_width="100dp"
-                android:layout_height="75dp"
                 android:id="@+id/btnCancel"
-                android:text="CANCEL"
-                android:background="#F44336"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                />
+                android:layout_height="64dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/bg_key_cancel"
+                android:text="Cancel"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
             <Button
-                android:layout_width="100dp"
-                android:layout_height="75dp"
                 android:id="@+id/btn0"
+                android:layout_height="64dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/bg_key_num"
                 android:text="0"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                />
+                android:textColor="#222222"
+                android:textSize="20sp" />
             <Button
-                android:layout_width="100dp"
-                android:layout_height="75dp"
                 android:id="@+id/btnOK"
-                android:text="ok"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:background="#4CAF50"
-                />
-
-
+                android:layout_height="64dp"
+                android:layout_margin="4dp"
+                android:background="@drawable/bg_key_ok"
+                android:enabled="false"
+                android:text="OK"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
         </TableRow>
-
     </TableLayout>
+
 </LinearLayout>
