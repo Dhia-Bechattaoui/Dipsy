@@ -4,20 +4,21 @@ A lightweight Android point-of-sale app in Kotlin that takes an amount on a cust
 
 ## App Flow Demo
 
-![POS Flow Demo](screenshots/demo.gif)
+<img src="screenshots/demo.gif" width="280" alt="POS Flow Demo" />
 
 ---
 
 ## Screenshots
 
-### 1. POS Amount Screen
-![POS Amount Screen](screenshots/pos_screen.png)
+### 1. POS Amount Screen & Transaction History
+<p align="left">
+  <img src="screenshots/pos_screen.png" width="280" alt="POS Amount Screen" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="screenshots/history_screen.png" width="280" alt="Transaction History" />
+</p>
 
 ### 2. Transaction Results (Pending, Approved & Failed)
-![Payment Results](screenshots/results_combined.png)
-
-### 3. Transaction History
-![Transaction History](screenshots/history_screen.png)
+<img src="screenshots/results_combined.png" width="650" alt="Payment Results" />
 
 ---
 
