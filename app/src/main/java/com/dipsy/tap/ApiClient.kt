@@ -73,7 +73,7 @@ object ApiClient {
         .build()
 
     val api: PosApi = Retrofit.Builder()
-        .baseUrl("http://localhost:8080/")
+        .baseUrl("https://api.dibsy.cloud/")
         .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
