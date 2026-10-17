@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.2] - 2026-10-17
+
+### Added
+- Pure helper functions (`appendDigit`, `formatQar`) in `MainActivity.kt` for testable amount logic without Android framework dependencies.
+- Unit test suite (`AmountInputTest.kt`) verifying cent-shift entry, 7-digit ceiling constraints, zero-value guards, and standard QAR currency formatting.
+
+### Fixed
+- Automatic idempotency key invalidation when editing amounts after an API error, eliminating HTTP 422 (`idempotency_mismatch`) errors on retry.
+- Coroutine cooperative cancellation in `ResultActivity.kt` status polling by catching `IOException` instead of swallowing `CancellationException`.
+
+### Removed
+- Default `ExampleUnitTest.kt` boilerplate.
+
 ## [0.0.1] - 2026-10-17
 
 ### Added
@@ -22,4 +35,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Transaction History screen displaying the latest 20 transactions from `GET /transactions`.
 - Release APK build and signing configuration.
 
+[0.0.2]: https://github.com/Dhia-Bechattaoui/Dipsy/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/Dhia-Bechattaoui/Dipsy/releases/tag/v0.0.1
+

@@ -85,17 +85,18 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun addDigit(value: Int) {
-        val next = (amount * 10) + value
-        if (next <= 99_999_99L) {
+        val next = appendDigit(amount, value)
+        if (next != amount) {
             amount = next
             updateDisplay()
-            layoutError.visibility = View.GONE
+            if (layoutError.visibility == View.VISIBLE) {
+                resetErrorAndKey()
+            }
         }
     }
 
     private fun updateDisplay() {
-        val qar = amount / 100.0
-        tvAmount.text = "QAR " + String.format(Locale.US, "%,.2f", qar)
+        tvAmount.text = formatQar(amount)
         btnOK.isEnabled = amount > 0 && !isSending
     }
 
@@ -164,4 +165,13 @@ class MainActivity : ComponentActivity() {
             null
         }
     }
+}
+
+internal fun appendDigit(current: Long, digit: Int): Long {
+    val next = (current * 10) + digit
+    return if (next <= 99_999_99L) next else current
+}
+
+internal fun formatQar(cents: Long): String {
+    return "QAR " + String.format(Locale.US, "%,.2f", cents / 100.0)
 }

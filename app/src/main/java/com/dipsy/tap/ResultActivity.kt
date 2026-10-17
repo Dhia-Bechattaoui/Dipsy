@@ -12,6 +12,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import java.io.IOException
 import java.util.Locale
 
 class ResultActivity : ComponentActivity() {
@@ -91,7 +92,8 @@ class ResultActivity : ComponentActivity() {
                             return@launch
                         }
                     }
-                } catch (_: Exception) {
+                } catch (_: IOException) {
+                    // Transient network issue during polling; retry on next tick
                 }
             }
 
