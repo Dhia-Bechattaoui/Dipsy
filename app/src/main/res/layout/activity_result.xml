@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:visibility="gone"
+        android:layout_gravity="center"/>
+
+    <ImageView
+        android:id="@+id/ivStatus"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:srcCompat="@android:drawable/checkbox_on_background" />
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="12sp"
+        android:gravity="center"/>
+    <TextView
+        android:id="@+id/amount2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:text="12 QAR"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/transaction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:text="12 QAR"
+        android:gravity="center"
+        />
+
+    <Button
+        android:id="@+id/btnNewPyament"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:text="NewPayment"
+        />
+
+</LinearLayout>
