@@ -28,9 +28,7 @@ class ResultActivity : ComponentActivity() {
         setContentView(R.layout.activity_result)
         val amount = intent.getLongExtra("amount", 0L)
         val currency = intent.getStringExtra("currency") ?: "QAR"
-        // 2. Build the PayRequest data object
         val request = PayRequest(amount = amount, currency = currency)
-        // 3. Call api.pay() to start the network request
         tvResult = findViewById<TextView>(R.id.result)
         progressBar = findViewById(R.id.progressBar)
         tvTransaction = findViewById<TextView>(R.id.transaction)
@@ -38,14 +36,12 @@ class ResultActivity : ComponentActivity() {
         startPayment(request)
     }
 
-
     private fun startPayment(request: PayRequest) {
         lifecycleScope.launch {
             try {
                 progressBar.visibility = View.VISIBLE
                 tvResult.setText("Progressing....")
-                // Access 'api.pay()' and pass the request object
-                val response = api.pay(
+                val response = ApiClient.api.pay(
                     body = request,
                     idempotencyKey = UUID.randomUUID().toString()
                 )
@@ -68,54 +64,3 @@ class ResultActivity : ComponentActivity() {
         }
     }
 }
-
-
-data class PayRequest(val amount: Long, val currency: String = "QAR")
-data class Transaction(
-    val id: String,
-    val amount: Long,
-    val currency: String,
-    val status: String, // "pending" | "success" | "failed"
-    val reason: String?,
-    val createdAt: String,
-    val updatedAt: String,
-)
-
-data class TransactionList(val items: List<Transaction>, val count: Int)
-data class ApiError(val error: ErrorBody) {
-    data class ErrorBody(val code: String, val message: String)
-}
-
-interface PosApi {
-    @POST("pay")
-    suspend fun pay(
-        @Body body: PayRequest,
-        @Header("Idempotency-Key") idempotencyKey: String?,
-    ): Response<Transaction>
-
-    @GET("transactions/{id}")
-    suspend fun transaction(@Path("id") id: String): Response<Transaction>
-
-    @GET("transactions")
-    suspend fun transactions(@Query("limit") limit: Int = 20):
-            Response<TransactionList>
-}
-
-val client = OkHttpClient.Builder()
-    .addInterceptor { chain ->
-        chain.proceed(
-            chain.request().newBuilder()
-                .header(
-                    "X-Api-Key",
-                    "test_key_123"
-                )
-                .build()
-        )
-    }
-    .build()
-val api: PosApi = Retrofit.Builder()
-    .baseUrl("https://api.dibsy.cloud/")
-    .client(client)
-    .addConverterFactory(GsonConverterFactory.create())
-    .build()
-    .create(PosApi::class.java)
