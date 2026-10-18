@@ -62,4 +62,12 @@ class AmountInputTest {
         assertEquals("QAR 1,500.00", formatQar(150000L))
         assertEquals("QAR 99,999.99", formatQar(9999999L))
     }
+
+    @Test
+    fun `formatAmount supports multi-currency formatting for USD, EUR, and QAR`() {
+        assertEquals("USD 0.00", formatAmount(0L, "USD"))
+        assertEquals("USD 25.50", formatAmount(2550L, "USD"))
+        assertEquals("EUR 1,500.00", formatAmount(150000L, "EUR"))
+        assertEquals("QAR 99,999.99", formatAmount(9999999L, "QAR"))
+    }
 }

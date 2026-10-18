@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.0] - 2026-10-18
+
+### Added
+- Dynamic multi-currency selector (`QAR`, `USD`, `EUR`) on the POS keypad screen using segmented pill buttons.
+- `formatAmount(cents, currency)` helper function supporting any ISO currency string while retaining backward-compatible `formatQar` delegation.
+- Multi-currency unit test suite in `AmountInputTest.kt` verifying formatting across USD, EUR, and QAR.
+- Dynamic currency display in `ResultActivity` reflecting the selected currency on submission and real-time transaction polling updates.
+- Dynamic currency formatting in `HistoryActivity` rendering each transaction with its respective server currency.
+
+### Changed
+- Active payment submission in `MainActivity.kt` now passes the selected currency in `PayRequest`.
+- Switching currency dynamically refreshes the display and resets the idempotency key to avoid server-side conflict errors.
+
 ## [0.0.2] - 2026-10-17
 
 ### Added
@@ -35,6 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Transaction History screen displaying the latest 20 transactions from `GET /transactions`.
 - Release APK build and signing configuration.
 
+[0.1.0]: https://github.com/Dhia-Bechattaoui/Dipsy/compare/v0.0.2...v0.1.0
 [0.0.2]: https://github.com/Dhia-Bechattaoui/Dipsy/compare/v0.0.1...v0.0.2
 [0.0.1]: https://github.com/Dhia-Bechattaoui/Dipsy/releases/tag/v0.0.1
 

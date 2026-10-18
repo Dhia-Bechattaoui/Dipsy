@@ -85,8 +85,9 @@ class HistoryActivity : ComponentActivity() {
             holder.tvTxId.text = item.id
             holder.tvTxDate.text = item.createdAt.take(19).replace("T", " ")
 
-            val qar = item.amount / 100.0
-            holder.tvTxAmount.text = "QAR " + String.format(Locale.US, "%,.2f", qar)
+            val formatted = item.amount / 100.0
+            val currency = item.currency.ifBlank { "QAR" }
+            holder.tvTxAmount.text = "$currency " + String.format(Locale.US, "%,.2f", formatted)
 
             holder.tvTxStatus.text = item.status.uppercase(Locale.US)
             when (item.status) {

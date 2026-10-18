@@ -1,6 +1,7 @@
 package com.dipsy.tap
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -16,6 +17,7 @@ import java.util.UUID
 class MainActivity : ComponentActivity() {
 
     private var amount: Long = 0L
+    private var currency: String = "QAR"
     private var idempotencyKey: String = UUID.randomUUID().toString()
     private var isSending: Boolean = false
 
@@ -25,6 +27,9 @@ class MainActivity : ComponentActivity() {
     private lateinit var layoutError: View
     private lateinit var tvError: TextView
     private lateinit var btnRetry: Button
+    private lateinit var btnCurrencyQar: TextView
+    private lateinit var btnCurrencyUsd: TextView
+    private lateinit var btnCurrencyEur: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,12 +41,20 @@ class MainActivity : ComponentActivity() {
         layoutError = findViewById(R.id.layoutError)
         tvError = findViewById(R.id.tvError)
         btnRetry = findViewById(R.id.btnRetry)
+        btnCurrencyQar = findViewById(R.id.btnCurrencyQar)
+        btnCurrencyUsd = findViewById(R.id.btnCurrencyUsd)
+        btnCurrencyEur = findViewById(R.id.btnCurrencyEur)
+
+        btnCurrencyQar.setOnClickListener { setCurrency("QAR") }
+        btnCurrencyUsd.setOnClickListener { setCurrency("USD") }
+        btnCurrencyEur.setOnClickListener { setCurrency("EUR") }
 
         findViewById<TextView>(R.id.btnHistory).setOnClickListener {
             startActivity(Intent(this, HistoryActivity::class.java))
         }
 
         setupNumpad()
+        updateCurrencyUI()
         updateDisplay()
     }
 
@@ -95,8 +108,31 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    private fun setCurrency(newCurrency: String) {
+        if (isSending || currency == newCurrency) return
+        currency = newCurrency
+        updateCurrencyUI()
+        updateDisplay()
+        resetErrorAndKey()
+    }
+
+    private fun updateCurrencyUI() {
+        val buttons = listOf(
+            btnCurrencyQar to "QAR",
+            btnCurrencyUsd to "USD",
+            btnCurrencyEur to "EUR"
+        )
+        for ((button, curr) in buttons) {
+            val isSelected = (curr == currency)
+            button.setBackgroundResource(
+                if (isSelected) R.drawable.bg_currency_selected else R.drawable.bg_currency_unselected
+            )
+            button.setTextColor(if (isSelected) Color.WHITE else Color.parseColor("#555555"))
+        }
+    }
+
     private fun updateDisplay() {
-        tvAmount.text = formatQar(amount)
+        tvAmount.text = formatAmount(amount, currency)
         btnOK.isEnabled = amount > 0 && !isSending
     }
 
@@ -116,7 +152,7 @@ class MainActivity : ComponentActivity() {
         lifecycleScope.launch {
             try {
                 val response = ApiClient.api.pay(
-                    body = PayRequest(amount = amount, currency = "QAR"),
+                    body = PayRequest(amount = amount, currency = currency),
                     idempotencyKey = idempotencyKey
                 )
 
@@ -172,6 +208,10 @@ internal fun appendDigit(current: Long, digit: Int): Long {
     return if (next <= 99_999_99L) next else current
 }
 
+internal fun formatAmount(cents: Long, currency: String = "QAR"): String {
+    return "$currency " + String.format(Locale.US, "%,.2f", cents / 100.0)
+}
+
 internal fun formatQar(cents: Long): String {
-    return "QAR " + String.format(Locale.US, "%,.2f", cents / 100.0)
+    return formatAmount(cents, "QAR")
 }

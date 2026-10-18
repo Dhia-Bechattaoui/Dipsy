@@ -42,10 +42,11 @@ class ResultActivity : ComponentActivity() {
 
         transactionId = intent.getStringExtra("transaction_id") ?: ""
         val amount = intent.getLongExtra("amount", 0L)
+        val currency = intent.getStringExtra("currency") ?: "QAR"
         val initialStatus = intent.getStringExtra("status") ?: "pending"
 
-        val qar = amount / 100.0
-        tvAmount.text = "QAR " + String.format(Locale.US, "%,.2f", qar)
+        val formatted = amount / 100.0
+        tvAmount.text = "$currency " + String.format(Locale.US, "%,.2f", formatted)
         tvTransaction.text = transactionId
 
         btnNewPayment.setOnClickListener {
@@ -87,6 +88,7 @@ class ResultActivity : ComponentActivity() {
                     val response = ApiClient.api.transaction(transactionId)
                     if (response.isSuccessful && response.body() != null) {
                         val tx = response.body()!!
+                        tvAmount.text = "${tx.currency} " + String.format(Locale.US, "%,.2f", tx.amount / 100.0)
                         if (tx.status != "pending") {
                             updateFinalUI(tx.status, tx.reason)
                             return@launch
